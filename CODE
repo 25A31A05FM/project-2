@@ -1,0 +1,226 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+    public:
+    string name;
+    int distance;
+    int fare;
+    Node* next;
+};
+
+Node* head = NULL;
+
+// Stack for reverse + history
+string stackArr[200];
+int top = -1;
+
+void push(string x) {
+    stackArr[++top] = x;
+}
+
+string pop() {
+    return stackArr[top--];
+}
+
+// Add station at end
+void addStation(string name, int dist, int fare) {
+    Node* newNode = new Node();
+    newNode->name = name;
+    newNode->distance = dist;
+    newNode->fare = fare;
+    newNode->next = NULL;
+
+    if (head == NULL)
+        head = newNode;
+    else {
+        Node* temp = head;
+        while (temp->next != NULL)
+            temp = temp->next;
+        temp->next = newNode;
+    }
+}
+
+// Insert at position
+void insertAtPos(string name, int dist, int fare, int pos) {
+    Node* newNode = new Node();
+    newNode->name = name;
+    newNode->distance = dist;
+    newNode->fare = fare;
+
+    if (pos == 1) {
+        newNode->next = head;
+        head = newNode;
+        return;
+    }
+
+    Node* temp = head;
+    for (int i = 1; i < pos - 1 && temp != NULL; i++)
+        temp = temp->next;
+
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+// Delete station
+void deleteStation(string name) {
+    Node *temp = head, *prev = NULL;
+
+    while (temp != NULL && temp->name != name) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        cout << "Not Found\n";
+        return;
+    }
+
+    if (prev == NULL)
+        head = temp->next;
+    else
+        prev->next = temp->next;
+
+    delete temp;
+}
+
+// Display route
+void display() {
+    Node* temp = head;
+    while (temp != NULL) {
+        cout << temp->name << "(" << temp->distance << "km, Rs." << temp->fare << ") -> ";
+        temp = temp->next;
+    }
+    cout << "NULL\n";
+}
+
+// Reverse display
+void reverseDisplay() {
+    Node* temp = head;
+    while (temp != NULL) {
+        push(temp->name);
+        temp = temp->next;
+    }
+
+    while (top != -1)
+        cout << pop() << " -> ";
+
+    cout << "NULL\n";
+}
+
+// Search
+void search(string name) {
+    Node* temp = head;
+    while (temp != NULL) {
+        if (temp->name == name) {
+            cout << "Found\n";
+            return;
+        }
+        temp = temp->next;
+    }
+    cout << "Not Found\n";
+}
+
+// Total distance
+void totalDistance() {
+    int sum = 0;
+    Node* temp = head;
+    while (temp != NULL) {
+        sum += temp->distance;
+        temp = temp->next;
+    }
+    cout << "Total Distance: " << sum << " km\n";
+}
+
+// Total fare
+void totalFare() {
+    int sum = 0;
+    Node* temp = head;
+    while (temp != NULL) {
+        sum += temp->fare;
+        temp = temp->next;
+    }
+    cout << "Total Fare: Rs." << sum << endl;
+}
+
+// Travel simulation
+void travel() {
+    Node* temp = head;
+    cout << "Journey:\n";
+    while (temp != NULL) {
+        cout << "Reached: " << temp->name << endl;
+        push(temp->name);
+        temp = temp->next;
+    }
+}
+
+// Show history
+void showHistory() {
+    cout << "Travel History:\n";
+    while (top != -1)
+        cout << pop() << endl;
+}
+
+int main() {
+    int ch, dist, fare, pos;
+    string name;
+
+    while (1) {
+        cout << "\n1.Add 2.Insert 3.Delete 4.Display 5.Reverse\n";
+        cout << "6.Search 7.TotalDist 8.TotalFare 9.Travel 10.History 11.Exit\n";
+        cin >> ch;
+
+        switch (ch) {
+        case 1:
+            cout << "Enter Name, Distance, Fare: ";
+            cin >> name >> dist >> fare;
+            addStation(name, dist, fare);
+            break;
+
+        case 2:
+            cout << "Enter Name, Distance, Fare, Position: ";
+            cin >> name >> dist >> fare >> pos;
+            insertAtPos(name, dist, fare, pos);
+            break;
+
+        case 3:
+            cout << "Enter Name: ";
+            cin >> name;
+            deleteStation(name);
+            break;
+
+        case 4:
+            display();
+            break;
+
+        case 5:
+            reverseDisplay();
+            break;
+
+        case 6:
+            cout << "Search: ";
+            cin >> name;
+            search(name);
+            break;
+
+        case 7:
+            totalDistance();
+            break;
+
+        case 8:
+            totalFare();
+            break;
+
+        case 9:
+            travel();
+            break;
+
+        case 10:
+            showHistory();
+            break;
+
+        case 11:
+            return 0;
+        }
+    }
+}
