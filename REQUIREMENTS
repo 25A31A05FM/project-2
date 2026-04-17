@@ -1,0 +1,19 @@
+Requirements
+
+🔹 Hardware Requirements
+Computer/Laptop
+Minimum 4GB RAM
+🔹 Software Requirements
+C++ Compiler (Turbo C++ / GCC / VS Code)
+Operating System (Windows/Linux/Mac)
+🔹 Functional Requirements
+Add station
+Insert station at position
+Delete station
+Display route
+Reverse display
+Search station
+Calculate total distance
+Calculate total fare
+Simulate journey
+Show travel history
