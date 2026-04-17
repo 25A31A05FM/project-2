@@ -1,0 +1,68 @@
+Algorithm: Train/Bus Route Management System
+
+Step 1: Start
+Initialize head = NULL
+Initialize stack (top = -1)
+
+Step 2: Display Menu
+Show options:
+Add Station
+Insert at Position
+Delete Station
+Display Route
+Reverse Display
+Search Station
+Total Distance
+Total Fare
+Travel Simulation
+Show History
+Exit
+
+Step 3: Read User Choice
+Input choice ch
+
+Step 4: Perform Operation (Switch Case)
+   Case 1: Add Station
+Create new node
+If list empty → make it head
+Else → insert at end
+   Case 2: Insert at Position
+Create new node
+Traverse to position
+Insert node at given position
+   Case 3: Delete Station
+Search node by name
+If found:
+Adjust links
+Delete node
+Else → print "Not Found"
+   Case 4: Display Route
+Traverse linked list
+Print each station
+   Case 5: Reverse Display
+Traverse list and push names into stack
+Pop and display (reverse order)
+   Case 6: Search Station
+Traverse list
+If found → print "Found"
+Else → print "Not Found"
+   Case 7: Total Distance
+Traverse list
+Add all distances
+Display total
+   Case 8: Total Fare
+Traverse list
+Add all fares
+Display total
+   Case 9: Travel Simulation
+Traverse list
+Print each station reached
+Push into stack (for history)
+   Case 10: Show History
+Pop all elements from stack
+Display travel history
+   Case 11: Exit
+Stop program
+
+Step 5: Repeat
+Go back to menu until user exits
