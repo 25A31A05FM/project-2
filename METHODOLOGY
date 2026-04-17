@@ -1,0 +1,16 @@
+Methodology:
+
+1.Use Singly Linked List to store station details
+Each node contains:
+Station name
+Distance
+Fare
+2.Use Stack for:
+Reverse display
+Travel history
+Implement menu-driven approach using loop and switch-case
+3.Traverse linked list for:
+Display
+Search
+Calculations
+Perform operations step-by-step based on user input
